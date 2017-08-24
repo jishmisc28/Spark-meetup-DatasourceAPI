@@ -1,0 +1,54 @@
+																-- Datatsource API Session| apigee | 27Jun2015 --
+-- Git commands
+git tag -l
+git checkout -b first v0.1
+
+
+-Datasource API
+-DataFrames
+-Spark SQL
+
+# U need to have a spark SQL context to access any of the datasource API.
+# traits in spark are analogous to interface in java.
+
+-- Schema Discovery | handled by API and hidden from user
+# DefaultSource -> (def createRelation)
+# BaseRelation -> (def sqlContext, def schema:StructType)
+ MyQ: if hadoop has a default InputFormat 
+
+-- Read Data
+# Table Scan is a trait (def buildScan: RDD[row])
+load calls schema, count calls buildScan
+
+-- Inferring data types
+* till above treated everything as string
+# strategy is infer each row which is string
+# then typecast it to proper datatype
+** Madhukar explained that sampling by default in DataSource API is 1.0 which implies when u load a json or csv files, it will try to infer data type for all rows.
+
+-- save as csv file
+# DefaultSource should implement saveAsCsvFile function 
+# Override CreateRelation function to take RDD[row] and change it to RDD[String]
+
+------------------- 2nd part of the session -----------------------------
+-- column pruning
+# selected columns than all the columns
+# Filter Push:
+	- def prunedFilterScan
+# So filter push is analogous to filtering rows in SQL.
+	
+How to find datasource APIS??
+	- Spark Packages
+	- they have implemented mongoDB and other API's 
+
+------------------------------------------------------------------------------------------------------------------
+															-- Session by Sony Manager on ELK stack --
+ELK Stack
+- Elastic Search (elastic search tutorial .com)
+- logstash
+- kibbana
+
+An inverted index consists of a list of words that contain in the document and the listing of those documents where this words appear.
+	
+Apache Zeppelin (incubator)
+	- Does visualization on spark, scala, sql
